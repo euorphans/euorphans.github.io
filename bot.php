@@ -1,6 +1,27 @@
 
 
     <?php
+
+if (!isset($_REQUEST)) {
+return;
+}
+
+//Строка для подтверждения адреса сервера из настроек Callback API
+$confirmation_token = 'хххххххх';
+
+//Ключ доступа сообщества
+$token = 'xxx';
+
+//Получаем и декодируем уведомление
+$data = json_decode(file_get_contents('php://input'));
+
+//Проверяем, что находится в поле "type"
+switch ($data->type) {
+//Если это уведомление для подтверждения адреса...
+case 'confirmation':
+//...отправляем строку для подтверждения
+echo $confirmation_token;
+break;
      
     define('confirmation_token', '50dc77d0');                                                                
     define('token', '9c21fca28aeb51965f4eed762926d4c2cdd99748db9061804d979989438621964d100b85aeb877f183402');
